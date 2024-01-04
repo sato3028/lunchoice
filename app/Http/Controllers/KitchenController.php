@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreKitchenRequest;
 use App\Http\Requests\UpdateKitchenRequest;
 use App\Models\Kitchen;
+use Inertia\Inertia;
 
 class KitchenController extends Controller
 {
@@ -13,7 +14,9 @@ class KitchenController extends Controller
      */
     public function index()
     {
-        //
+        // nameとdescriptionを取得してviewに送る
+        $kitchens = Kitchen::all(['name', 'description']);
+        return Inertia::render('Kitchens/Index', ['kitchens' => $kitchens]);
     }
 
     /**
