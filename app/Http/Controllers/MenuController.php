@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 use App\Models\Menu;
+use Inertia\Inertia;
 
 class MenuController extends Controller
 {
@@ -14,6 +15,7 @@ class MenuController extends Controller
     public function index()
     {
         //
+        return Inertia::render('Menus/Index');
     }
 
     /**

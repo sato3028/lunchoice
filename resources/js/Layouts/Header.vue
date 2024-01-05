@@ -3,7 +3,7 @@
 
 <template>
     <header>
-        <div class="logo"><img src="https://placehold.jp/300x100.png" alt=""></div>
+        <div class="logo"><img src="https://res.cloudinary.com/dqaxgeag8/image/upload/v1704434557/LunchoiceLogo.png" alt=""></div>
     </header>
 </template>
 
