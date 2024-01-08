@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
+use App\Models\Kitchen; 
 use App\Models\Menu;
 use Inertia\Inertia;
 
@@ -12,10 +13,10 @@ class MenuController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($kitchenId)
     {
-        //
-        return Inertia::render('Menus/Index');
+        $kitchen = Kitchen::with('menus')->findOrFail($kitchenId);
+        return Inertia::render('Menus/Index', ['menus' => $kitchen->menus]);
     }
 
     /**

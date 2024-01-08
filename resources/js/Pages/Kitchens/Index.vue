@@ -1,4 +1,5 @@
 <script setup>
+  import { Link } from '@inertiajs/vue3'
   import Header_Component from '@/Layouts/Header.vue';
 
   const props = defineProps({
@@ -14,10 +15,11 @@
       <h2>キッチンカーを選ぶ</h2>
     </div>
     <div id="main_content">
-        <div class="item" v-for="kitchen in kitchens" :key="kitchen.id">
+      <div v-for="kitchen in kitchens" :key="kitchen.id" class="item">
+        <Link :href="`/kitchens/${kitchen.id}/menus`">
           <img src="https://placehold.jp/100x100.png" alt="">
-          <!--<h2>{{ kitchen.name }}</h2>-->
-        </div>
+        </Link>
+      </div>
     </div>
   </div>
 </template>
