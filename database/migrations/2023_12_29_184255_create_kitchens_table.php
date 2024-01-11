@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('kitchens', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('image_data')->nullable(); 
             $table->text('description')->nullable();
             $table->timestamps();
         });
