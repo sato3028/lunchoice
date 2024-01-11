@@ -15,7 +15,7 @@ class KitchenController extends Controller
     public function index()
     {
         // nameとdescriptionを取得してviewに送る
-        $kitchens = Kitchen::all(['id', 'name', 'description']);
+        $kitchens = Kitchen::all(['id', 'name', 'description', 'image_data']);
         return Inertia::render('Kitchens/Index', ['kitchens' => $kitchens]);
     }
 

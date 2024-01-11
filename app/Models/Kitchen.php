@@ -9,7 +9,7 @@ class Kitchen extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'image_data'];
 
     public function menus()
     {

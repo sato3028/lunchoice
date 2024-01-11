@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->text('image_data')->nullable(); 
             $table->decimal('price', 8, 2);
             $table->foreignId('kitchen_id')->constrained()->onDelete('cascade');
             $table->timestamps();

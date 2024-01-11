@@ -22,7 +22,8 @@ class MenuController extends Controller
                 return [
                     'id' => $menu->id,
                     'name' => $menu->name,
-                    'price' => $menu->price
+                    'price' => $menu->price,
+                    'image' => $menu->image_data,
                 ];
             }),
         ]);
