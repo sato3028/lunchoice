@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateMenuRequest;
 use App\Models\Kitchen; 
 use App\Models\Menu;
 use Inertia\Inertia;
+use Illuminate\Http\Request; 
 
 class MenuController extends Controller
 {
@@ -16,8 +17,16 @@ class MenuController extends Controller
     public function index($kitchenId)
     {
         $kitchen = Kitchen::with('menus')->findOrFail($kitchenId);
-        return Inertia::render('Menus/Index', ['menus' => $kitchen->menus]);
-    }
+        return Inertia::render('Menus/Index', [
+            'menus' => $kitchen->menus->map(function ($menu) {
+                return [
+                    'id' => $menu->id,
+                    'name' => $menu->name,
+                    'price' => $menu->price
+                ];
+            }),
+        ]);
+    }    
 
     /**
      * Show the form for creating a new resource.
