@@ -15,10 +15,18 @@ class KitchenSeeder extends Seeder
     {
         // キッチンの名前
         $kitchens = [
-            ['name' => '笑がNICE', 'description' => null],
-            ['name' => 'SMAPPYCAFE', 'description' => null],
-            ['name' => 'CHERIE', 'description' => null],
-            ['name' => 'BONNIE&FRIED.tokyo', 'description' => null],
+            ['name' => '笑がNICE',
+            'description' => null,
+            'image_data' => 'https://res.cloudinary.com/dqaxgeag8/image/upload/v1704434805/ShougaNice.jpg'],
+            ['name' => 'SMAPPYCAFE',
+            'description' => null,
+            'image_data' => 'https://res.cloudinary.com/dqaxgeag8/image/upload/v1704434818/SmappyCafe.jpg'],
+            ['name' => 'CHERIE',
+            'description' => null,
+            'image_data' => 'https://res.cloudinary.com/dqaxgeag8/image/upload/v1704434565/HaitiCherie.jpg'],
+            ['name' => 'BONNIE&FRIED.tokyo',
+            'description' => null,
+            'image_data' => 'https://res.cloudinary.com/dqaxgeag8/image/upload/v1704434797/BonieFriedTokyo.jpg'],
         ];
 
         // データベースに挿入
