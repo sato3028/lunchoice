@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KitchenController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\MenuController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,8 @@ Route::get('/dashboard', function () {
 
 Route::get('/kitchens', [KitchenController::class, 'index'])->name('kitchens');
 Route::get('/kitchens/{kitchen}/menus', [MenuController::class, 'index']);
+
+Route::post('/reservations/add-to-cart', [ReservationController::class, 'addToCart']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -16,6 +16,11 @@ class Reservation extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function menu()
+    {
+        return $this->belongsTo(Menu::class);
+    }
+
     public function reservationDetails()
     {
         return $this->hasMany(ReservationDetail::class);
