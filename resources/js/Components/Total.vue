@@ -15,5 +15,8 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div>合計金額: {{ totalAmount }}</div>
+  <div id="order_info">
+    <div>合計金額: {{ totalAmount }} 円</div>
+    <p class="pay_button" @click="addToCart(menu.id)"><button>カートに追加</button></p>
+  </div>
 </template>
