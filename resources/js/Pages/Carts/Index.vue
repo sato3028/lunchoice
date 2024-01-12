@@ -147,6 +147,11 @@ header .logo img {
   margin: 60px 0;
 }
 
+#content_area #step h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight:500;
+}
+
 #order_info {
   position: fixed;
   bottom: 0;
@@ -225,7 +230,10 @@ header .logo img {
   margin-right: 30px;
   object-fit: cover;
 }
-@media screen and (max-width: 386px) {
+@media screen and (max-width: 390px) {
+  #content_area #step {
+    margin: 40px 0;
+  }
   #content_area .store_content {
     margin:0;
   }

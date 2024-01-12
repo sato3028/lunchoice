@@ -34,7 +34,7 @@ function addToCart(menuId) {
 
   <div id="content_area">
     <div id="step">
-          <h2>メニュー一覧</h2>
+          <h2>メニュー</h2>
     </div>
     <div class="store_content">
           <div v-for="menu in menus" :key="menu.id" class="item">
@@ -106,6 +106,11 @@ max-width: 780px;
 font-size: 24px;
 text-align: center;
 margin: 60px 0;
+}
+
+#content_area #step h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight:500;
 }
 
 #order_info {
@@ -188,7 +193,10 @@ width: 140px;
 margin-right: 30px;
 object-fit: cover;
 }
-@media screen and (max-width: 386px) {
+@media screen and (max-width: 390px) {
+  #content_area #step {
+    margin: 40px 0;
+  }
   #content_area .store_content {
     margin:0;
   }
