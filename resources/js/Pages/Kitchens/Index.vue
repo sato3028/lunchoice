@@ -41,6 +41,11 @@ body {
   margin: 60px 0;
 }
 
+#content_area #step h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight:500;
+}
+
 #order_info {
   position: fixed;
   bottom: 0;
