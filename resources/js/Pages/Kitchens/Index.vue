@@ -17,7 +17,7 @@
     <div id="main_content">
       <div v-for="kitchen in kitchens" :key="kitchen.id" class="item">
         <Link :href="`/kitchens/${kitchen.id}/menus`">
-          <img src="https://placehold.jp/100x100.png" alt="">
+          <img :src="kitchen.image_data" alt="">
         </Link>
       </div>
     </div>
@@ -85,7 +85,7 @@ body {
   background-color: #fff;
   filter: drop-shadow(0px 3px 5px rgba(100, 100, 100, 0.3));
 }
-/*#content_area #main_content .item img {
-  width: 100%;
-}*/
+#content_area #main_content .item img {
+  border-radius:50%;
+}
 </style>
