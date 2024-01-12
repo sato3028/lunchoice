@@ -223,5 +223,6 @@ header .logo img {
 #content_area .store_content .item img {
   width: 140px;
   margin-right: 30px;
+  object-fit: cover;
 }
 </style>
