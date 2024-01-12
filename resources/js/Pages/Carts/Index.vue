@@ -225,4 +225,9 @@ header .logo img {
   margin-right: 30px;
   object-fit: cover;
 }
+@media screen and (max-width: 386px) {
+  #content_area .store_content {
+    margin:0;
+  }
+}
 </style>
