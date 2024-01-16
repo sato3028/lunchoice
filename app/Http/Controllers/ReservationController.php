@@ -14,42 +14,10 @@ class ReservationController extends Controller
 {
     public function addToCart(Request $request)
     {
-        $menuId = $request->input('menuId');
-        $quantity = $request->input('quantity');
-
-        $cart = Session::get('cart', []);
-
-        if (isset($cart[$menuId])) {
-            $cart[$menuId]['quantity'] += $quantity;
-        } else {
-            $cart[$menuId] = ['menuId' => $menuId, 'quantity' => $quantity];
-        }
-
-        Session::put('cart', $cart);
-
-        return Inertia::render('Menus/Index', [
-            'message' => 'Item added to cart',
-        ]);
+        $cartItems = $request->input('cartItems', []);
+        Session::put('cart', $cartItems);
+        return redirect()->back();
     }
-
-    public function showCart()
-    {
-        $cart = Session::get('cart', []);
-
-        $cartItems = collect($cart)->mapWithKeys(function ($item, $menuId) {
-            $menu = Menu::find($menuId);
-            return [$menuId => [
-                'name' => $menu->name,
-                'price' => $menu->price,
-                'quantity' => $item['quantity']
-            ]];
-        });
-
-        return Inertia::render('Cart/Show', [
-            'cartItems' => $cartItems
-        ]);
-    }
-
 
     /**
      * Display a listing of the resource.

@@ -2,30 +2,47 @@
 import { ref } from 'vue';
 import { router } from '@inertiajs/vue3';
 import Total from '@/Components/Total.vue';
-
 import Header_Component from '@/Layouts/Header.vue';
 
 const props = defineProps({
   menus: Array
 });
+
+const cartItems = ref([]);
 const quantity = ref({});
-const cartItems = ref({});
+
+function formatPrice(price) {
+  const numericPrice = parseFloat(price);
+  if (!isNaN(numericPrice)) {
+    if (Number.isInteger(numericPrice)) {
+      return numericPrice.toString();
+    } else {
+      return numericPrice.toFixed(2);
+    }
+  } else {
+    console.error('価格データが無効です:', price);
+    return '0';
+  }
+}
 
 function addToCart(menuId) {
-  const selectedQuantity = quantity.value[menuId] || 1;
-  const menu = props.menus.find(menu => menu.id === menuId);
-  if (!menu) {
-    console.error('Menu not found');
-    return;
+  try {
+    const menuQuantity = quantity.value[menuId] || 1;
+    const menu = props.menus.find(m => m.id === menuId);
+
+    if (menu) {
+      cartItems.value.push({
+        menuId,
+        quantity: menuQuantity,
+        price: menu.price
+      });
+      router.post('/cart/add', { cartItems: cartItems.value });
+    } else {
+      console.error('メニュー項目が見つかりません: ', menuId);
+    }
+  } catch (error) {
+    console.error('カートに追加する際のエラー:', error);
   }
-
-  const menuPrice = menu.price;
-  cartItems.value[menuId] = {
-    quantity: selectedQuantity,
-    price: menuPrice,
-  };
-
-  router.post('/reservations/add-to-cart', { menuId, quantity: selectedQuantity });
 }
 </script>
 
@@ -34,49 +51,36 @@ function addToCart(menuId) {
 
   <div id="content_area">
     <div id="step">
-          <h2>メニュー</h2>
+      <h2>メニュー</h2>
     </div>
     <div class="store_content">
-          <div v-for="menu in menus" :key="menu.id" class="item">
-              <img src="https://placehold.jp/100x100.png" alt="">
-              <div class="item_info">
-                  <div class="item_name">{{ menu.name }}</div>
-                  <div class="item_control">
-                      <p class="price">¥700</p>
-                      <!--<input type="number" v-model="quantity[menu.id]" min="1">-->
-                      <select class="quantity">
-                          <option value="" selected></option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                      </select>
-                  </div>
-              </div>
+      <div v-for="menu in menus" :key="menu.id" class="item">
+        <img src="https://placehold.jp/100x100.png" alt="">
+        <div class="item_info">
+          <div class="item_name">{{ menu.name }}</div>
+          <div class="item_control">
+            <select class="quantity" v-model="quantity[menu.id]">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+            <p>{{ formatPrice(menu.price) }}円</p>
+            <button @click="addToCart(menu.id)">カートに追加</button>
           </div>
-    </div>
-    <div id="order_info">
-      <Total :cartItems="cartItems" />
+        </div>
+      </div>
+      <div id="order_info">
+        <Total :cartItems="cartItems" />
+      </div>
     </div>
   </div>
-  <!--
-    <div>
-      <h2>メニュー一覧</h2>
-      <div v-for="menu in menus" :key="menu.id">
-      {{ menu.name }}
-      <input type="number" v-model="quantity[menu.id]" min="1">
-      <button @click="addToCart(menu.id)">カートに追加</button>
-      </div>
-
-      <Total :cartItems="cartItems" />
-    </div>
-  -->
 </template>
 
 <style>
