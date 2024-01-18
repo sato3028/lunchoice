@@ -8,6 +8,7 @@ use App\Models\Kitchen;
 use App\Models\Menu;
 use Inertia\Inertia;
 use Illuminate\Http\Request; 
+use Illuminate\Support\Facades\Session;
 
 class MenuController extends Controller
 {
@@ -17,6 +18,9 @@ class MenuController extends Controller
     public function index($kitchenId)
     {
         $kitchen = Kitchen::with('menus')->findOrFail($kitchenId);
+    
+        $cartItems = Session::get('cart', []);
+    
         return Inertia::render('Menus/Index', [
             'menus' => $kitchen->menus->map(function ($menu) {
                 return [
@@ -26,6 +30,7 @@ class MenuController extends Controller
                     'image' => $menu->image_data,
                 ];
             }),
+            'cartItems' => $cartItems,
         ]);
     }    
 

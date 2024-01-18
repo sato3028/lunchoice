@@ -6,6 +6,7 @@ use App\Http\Requests\StoreKitchenRequest;
 use App\Http\Requests\UpdateKitchenRequest;
 use App\Models\Kitchen;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Session;
 
 class KitchenController extends Controller
 {
@@ -14,9 +15,14 @@ class KitchenController extends Controller
      */
     public function index()
     {
-        // nameとdescriptionを取得してviewに送る
         $kitchens = Kitchen::all(['id', 'name', 'description', 'image_data']);
-        return Inertia::render('Kitchens/Index', ['kitchens' => $kitchens]);
+
+        $cartItems = Session::get('cart', []);
+    
+        return Inertia::render('Kitchens/Index', [
+            'kitchens' => $kitchens,
+            'cartItems' => $cartItems
+        ]);
     }
 
     /**

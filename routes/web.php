@@ -37,6 +37,7 @@ Route::get('/kitchens', [KitchenController::class, 'index'])->name('kitchens');
 Route::get('/kitchens/{kitchen}/menus', [MenuController::class, 'index']);
 
 Route::post('/cart/add', [ReservationController::class, 'addToCart']);
+Route::get('/cart/items', [ReservationController::class, 'getCartItems']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

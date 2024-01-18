@@ -9,6 +9,7 @@ use App\Models\Menu;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 
 class ReservationController extends Controller
 {
@@ -17,6 +18,12 @@ class ReservationController extends Controller
         $cartItems = $request->input('cartItems', []);
         Session::put('cart', $cartItems);
         return redirect()->back();
+    }
+
+    public function getCartItems()
+    {
+        $cartItems = Session::get('cart', []);
+        return Inertia::location(route('kitchens.index', ['cartItems' => $cartItems]));
     }
 
     /**

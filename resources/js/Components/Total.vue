@@ -2,7 +2,10 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-  cartItems: Array
+  cartItems: {
+    type: Array,
+    default: () => []
+  }
 });
 
 const totalAmount = computed(() => {
