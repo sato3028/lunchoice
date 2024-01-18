@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('reservation_id')->constrained()->onDelete('cascade');
             $table->foreignId('menu_id')->constrained()->onDelete('cascade');
             $table->integer('quantity');
-            $table->decimal('subtotal', 8, 2);
+            $table->decimal('price', 8, 2);
             $table->timestamps();
         });
     }

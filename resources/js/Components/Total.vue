@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import { router, Link } from '@inertiajs/vue3';
 
 const props = defineProps({
   cartItems: {
@@ -28,4 +29,5 @@ const totalAmount = computed(() => {
   <div id="total_amount">
     合計金額: {{ totalAmount }} 円
   </div>
+  <Link href="/carts">カートを確認</Link>
 </template>

@@ -26,6 +26,13 @@ class ReservationController extends Controller
         return Inertia::location(route('kitchens.index', ['cartItems' => $cartItems]));
     }
 
+    public function resetSession()
+    {
+        Session::flush();
+
+        return redirect('/kitchens');
+    }
+
     /**
      * Display a listing of the resource.
      */

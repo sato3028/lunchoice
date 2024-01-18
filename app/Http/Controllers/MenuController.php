@@ -28,6 +28,7 @@ class MenuController extends Controller
                     'name' => $menu->name,
                     'price' => $menu->price,
                     'image' => $menu->image_data,
+                    'kitchenId' => $menu->kitchen_id, 
                 ];
             }),
             'cartItems' => $cartItems,
