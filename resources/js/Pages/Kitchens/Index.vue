@@ -1,9 +1,12 @@
 <script setup>
-  import { Link } from '@inertiajs/vue3'
+  import { onMounted, ref } from 'vue';
+  import { Link, router } from '@inertiajs/vue3'
   import Header_Component from '@/Layouts/Header.vue';
+  import Total from '@/Components/Total.vue';
 
   const props = defineProps({
-    kitchens: Array
+    kitchens: Array,
+    cartItems: Array 
   });
 </script>
 
@@ -20,6 +23,9 @@
           <img :src="kitchen.image_data" alt="">
         </Link>
       </div>
+    </div>
+    <div id="order_info">
+      <Total :cartItems="props.cartItems" />
     </div>
   </div>
 </template>

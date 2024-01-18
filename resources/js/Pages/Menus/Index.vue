@@ -1,14 +1,15 @@
 <script setup>
 import { ref } from 'vue';
-import { router } from '@inertiajs/vue3';
+import { router, Link } from '@inertiajs/vue3';
 import Total from '@/Components/Total.vue';
 import Header_Component from '@/Layouts/Header.vue';
 
 const props = defineProps({
-  menus: Array
+  menus: Array,
+  cartItems: Array
 });
 
-const cartItems = ref([]);
+const localCartItems = ref(props.cartItems || []);
 const quantity = ref({});
 
 function formatPrice(price) {
@@ -26,22 +27,22 @@ function formatPrice(price) {
 }
 
 function addToCart(menuId) {
-  try {
-    const menuQuantity = quantity.value[menuId] || 1;
-    const menu = props.menus.find(m => m.id === menuId);
+  const menu = props.menus.find(m => m.id === menuId);
 
-    if (menu) {
-      cartItems.value.push({
-        menuId,
-        quantity: menuQuantity,
-        price: menu.price
-      });
-      router.post('/cart/add', { cartItems: cartItems.value });
-    } else {
-      console.error('メニュー項目が見つかりません: ', menuId);
-    }
-  } catch (error) {
-    console.error('カートに追加する際のエラー:', error);
+  if (menu) {
+    const menuQuantity = quantity.value[menuId] || 1;
+
+    localCartItems.value.push({
+      menuId: menu.id,
+      quantity: menuQuantity,
+      price: menu.price
+    });
+
+    console.log('送信するカートアイテム:', localCartItems.value);
+
+    router.post('/cart/add', { cartItems: localCartItems.value });
+  } else {
+    console.error('メニュー項目が見つかりません: ', menuId);
   }
 }
 </script>
@@ -76,8 +77,11 @@ function addToCart(menuId) {
           </div>
         </div>
       </div>
+      
+      <Link href="/kitchens" class="go-back-button">キッチンに戻る</Link>
+
       <div id="order_info">
-        <Total :cartItems="cartItems" />
+        <Total :cartItems="localCartItems" />
       </div>
     </div>
   </div>
