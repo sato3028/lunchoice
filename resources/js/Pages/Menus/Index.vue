@@ -33,6 +33,9 @@ function addToCart(menuId) {
     const menuQuantity = quantity.value[menuId] || 1;
 
     localCartItems.value.push({
+      image: menu.image, 
+      kitchenId: menu.kitchenId, 
+      name: menu.name,
       menuId: menu.id,
       quantity: menuQuantity,
       price: menu.price

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KitchenController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\MenuController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,19 @@ Route::get('/kitchens/{kitchen}/menus', [MenuController::class, 'index']);
 
 Route::post('/cart/add', [ReservationController::class, 'addToCart']);
 Route::get('/cart/items', [ReservationController::class, 'getCartItems']);
+
+Route::get('/carts', [CartController::class, 'index']);
+Route::get('/carts/show', [CartController::class, 'show']);
+Route::get('/carts/accept', [CartController::class, 'accept']);
+Route::get('/carts/complete', function () {
+    return Inertia::render('Carts/Complete');
+});
+Route::post('/update-cart', [CartController::class, 'updateCart']);
+    
+Route::post('/create-order', [CartController::class, 'createOrder']);
+Route::post('/accept-order', [CartController::class, 'acceptOrder']);
+
+Route::get('/reset-session', [ReservationController::class, 'resetSession'])->name('reset-session');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -1,121 +1,84 @@
 <script setup>
-import { ref } from 'vue';
-import { router } from '@inertiajs/vue3';
-import Total from '@/Components/Total.vue';
-
+import { ref,computed } from 'vue';
+import { Link, router } from '@inertiajs/vue3';
 import Header_Component from '@/Layouts/Header.vue';
 
 const props = defineProps({
-  menus: Array
+  cartItems: Array
 });
-const quantity = ref({});
-const cartItems = ref({});
 
-function addToCart(menuId) {
-  const selectedQuantity = quantity.value[menuId] || 1;
-  const menu = props.menus.find(menu => menu.id === menuId);
-  if (!menu) {
-    console.error('Menu not found');
-    return;
+const groupedCartItems = computed(() => {
+  const grouped = {};
+  props.cartItems.forEach(item => {
+    if (!grouped[item.kitchenId]) {
+      grouped[item.kitchenId] = {
+        kitchenName: item.kitchenName,
+        items: []
+      };
+    }
+    grouped[item.kitchenId].items.push(item);
+  });
+  return grouped;
+});
+
+function kitchenName(kitchenId) {
+  const id = parseInt(kitchenId, 10);
+  switch (id) {
+    case 1:
+      return '笑がNICE';
+    case 2:
+      return 'SMAPPY CAFÉ';
+    case 3:
+      return 'CHERIE';
+    case 4:
+      return 'BONNIE&FRIED.tokyo';
+    default:
+      return '不明なキッチン';
   }
-
-  const menuPrice = menu.price;
-  cartItems.value[menuId] = {
-    quantity: selectedQuantity,
-    price: menuPrice,
-  };
-
-  router.post('/reservations/add-to-cart', { menuId, quantity: selectedQuantity });
 }
+
+const removeItem = (item, kitchenId) => {
+  const updatedItems = props.cartItems.filter(cartItem =>
+    !(cartItem.menuId === item.menuId && cartItem.kitchenId === kitchenId)
+  );
+
+  router.post('/update-cart', { cartItems: updatedItems });
+};
 </script>
 
 <template>
-    <Header_Component />
+  <Header_Component />
 
-    <div id="content_area">
-        <div id="step">
-            <h2>買い物かごを確認する</h2>
-        </div>
-        <div class="store_content">
-            <h3 class="store_name">笑がＮＩＣＥ</h3>
-            <div class="item">
-                <img src="https://placehold.jp/100x100.png" alt="">
-                <div class="item_info">
-                    <div class="item_name">商品名</div>
-                    <div class="item_control">
-                        <p class="price">¥700</p>
-                        <select class="quantity">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </div>
-                </div>
+  <div id="content_area">
+      <div id="step">
+          <h2>買い物かごを確認する</h2>
+      </div>
+      <div v-if="cartItems.length === 0">
+        カートには何も入っていません。
+      </div>
+      <div v-else class="store_content">
+        <div v-for="(group, kitchenId) in groupedCartItems" :key="kitchenId">
+          <h3 class="store_name">{{ kitchenName(kitchenId) }}</h3>
+          <div v-for="(item, index) in group.items" :key="index" class="item">
+            <img src="https://placehold.jp/100x100.png" alt="">
+            <div class="item_info">
+              <div class="item_name">{{ item.name }}</div>
+              <div class="item_control">
+                <p class="price">¥{{ item.price }}</p>
+                <p class="quantity">数量: {{ item.quantity }}</p>
+                <button @click="removeItem(item, kitchenId)">削除</button>
+              </div>
             </div>
-            <div class="item">
-                <img src="https://placehold.jp/100x100.png" alt="">
-                <div class="item_info">
-                    <div class="item_name">商品名B</div>
-                    <div class="item_control">
-                        <p class="price">¥600</p>
-                        <select class="quantity">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-        <div class="store_content">
-            <h3 class="store_name">Shop 2</h3>
-            <div class="item">
-                <img src="https://placehold.jp/100x100.png" alt="">
-                <div class="item_info">
-                    <div class="item_name">商品名</div>
-                    <div class="item_control">
-                        <p class="price">¥700</p>
-                        <select class="quantity">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>    
-    </div>
-    <!--<div>
-        <h2>メニュー一覧</h2>
-        <div v-for="menu in menus" :key="menu.id">
-        {{ menu.name }}
-        <input type="number" v-model="quantity[menu.id]" min="1">
-        <button @click="addToCart(menu.id)">カートに追加</button>
+        <div>
+          <Link href="/kitchens" class="btn">キッチンカー一覧に戻る</Link>
         </div>
-
-        <Total :cartItems="cartItems" />
-    </div>-->
+        <div>
+          <Link href="/carts/show" class="btn">購入</Link>
+        </div>
+      </div>
+  </div>
 </template>
 
 <style>
