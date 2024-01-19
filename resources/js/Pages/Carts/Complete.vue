@@ -9,6 +9,6 @@ import Header_Component from '@/Layouts/Header.vue';
   
       <h1>注文が完了しました</h1>
       <p>ありがとうございました！</p>
-      <Link href="/kitchens" class="btn">キッチンカー一覧に戻る</Link>
+      <Link href="/kitchens" class="btn">キッチンカーリストに戻る</Link>
     </div>
 </template>

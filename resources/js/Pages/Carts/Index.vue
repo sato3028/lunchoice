@@ -84,7 +84,10 @@ onMounted(() => {
             </div>
           </div>
         </div>
-        <div>
+        <div class="page_control_button">
+          <Link href="/kitchens" class="btn">キッチンカーリストに戻る</Link>
+        </div>
+        <div class="page_control_button buttons_margin">
           <Link href="/carts/show" class="btn">購入</Link>
         </div>
       </div>
@@ -151,6 +154,22 @@ header .logo img {
   display: none;
 }
 
+.page_control_button {
+  text-align:center;
+}
+.page_control_button a {
+  display:block;
+  padding:14px 20px;
+  width:100%;
+  background-color:#29A8E1;
+  color:#fff;
+  border-radius:14px;
+}
+
+.page_control_button.buttons_margin {
+  margin-top:14px;
+}
+
 @media screen and (max-width: 780px) {
   #content_area {
     margin: 0 16px;
@@ -174,7 +193,8 @@ header .logo img {
   display: flex;
   flex-wrap: wrap;
 }
-#content_area .store_content .item:not(:last-child) {
+/*#content_area .store_content .item:not(:last-child) {*/
+#content_area .store_content .item {
   margin-bottom: 40px;
 }
 #content_area .store_content .item .item_info {
