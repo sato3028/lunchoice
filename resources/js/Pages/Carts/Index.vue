@@ -1,5 +1,5 @@
 <script setup>
-import { ref,computed } from 'vue';
+import { ref,computed, onMounted } from 'vue';
 import { Link, router } from '@inertiajs/vue3';
 import Header_Component from '@/Layouts/Header.vue';
 
@@ -37,13 +37,26 @@ function kitchenName(kitchenId) {
   }
 }
 
-const removeItem = (item, kitchenId) => {
-  const updatedItems = props.cartItems.filter(cartItem =>
-    !(cartItem.menuId === item.menuId && cartItem.kitchenId === kitchenId)
-  );
+function removeItem(itemId) {
+  const updatedCartItems = props.cartItems.filter(item => item.id !== itemId);
+  router.post('/update-cart', { cartItems: updatedCartItems });
+}
 
-  router.post('/update-cart', { cartItems: updatedItems });
-};
+onMounted(() => {
+  console.log('カートアイテム:', props.cartItems);
+  if (props.cartItems.length > 0) {
+    console.log('カートアイテムの型:');
+    props.cartItems.forEach((item, index) => {
+      console.log(`アイテム ${index}:`, {
+        kitchenId: typeof item.kitchenId,
+        menuId: typeof item.menuId,
+        name: typeof item.name,
+        price: typeof item.price,
+        quantity: typeof item.quantity
+      });
+    });
+  }
+});
 </script>
 
 <template>
@@ -66,17 +79,17 @@ const removeItem = (item, kitchenId) => {
               <div class="item_control">
                 <p class="price">¥{{ item.price }}</p>
                 <p class="quantity">数量: {{ item.quantity }}</p>
-                <button @click="removeItem(item, kitchenId)">削除</button>
+                <button @click="removeItem(item.id)">削除</button>
               </div>
             </div>
           </div>
         </div>
         <div>
-          <Link href="/kitchens" class="btn">キッチンカー一覧に戻る</Link>
-        </div>
-        <div>
           <Link href="/carts/show" class="btn">購入</Link>
         </div>
+      </div>
+      <div>
+        <Link href="/kitchens" class="btn">キッチンカー一覧に戻る</Link>
       </div>
   </div>
 </template>
