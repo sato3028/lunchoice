@@ -24,11 +24,11 @@ class CartController extends Controller
     }
 
     public function updateCart(Request $request)
-    {  
-        $cartItems = $request->input('cartItems', []);
-        Session::put('cart', $cartItems);
-
-        return Inertia::render('Carts/Index', ['cartItems' => $cartItems]);
+    {
+        // dd($request->input('cartItems', []));
+    
+        Session::put('cart', $request->input('cartItems', []));
+        return back();
     }
 
     public function createOrder()
