@@ -63,20 +63,22 @@ function addToCart(menuId) {
         <div class="item_info">
           <div class="item_name">{{ menu.name }}</div>
           <div class="item_control">
-            <select class="quantity" v-model="quantity[menu.id]">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
-            <p>{{ formatPrice(menu.price) }}円</p>
-            <button @click="addToCart(menu.id)">カートに追加</button>
+            <div class="item_order_control">
+              <p>{{ formatPrice(menu.price) }}円</p>
+              <select class="quantity" v-model="quantity[menu.id]">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+            <button class="cart-button" @click="addToCart(menu.id)"><i class="fa-solid fa-cart-shopping"></i></button>
           </div>
         </div>
       </div>
@@ -191,17 +193,26 @@ justify-content: space-between;
 align-items: flex-end;
 width: 100%;
 }
+#content_area .store_content .item .item_control .item_order_control {
+display:flex;
+align-items:center;
+}
+#content_area .store_content .item .item_control .cart-button {
+margin-right:4px;
+font-size:24px;
+}
 #content_area .store_content .item .item_control .price {
 margin-right: 20px;
 font-size: 20px;
 color: #707070;
 }
 #content_area .store_content .item .item_control .quantity {
+margin-left:10px;
 height: 40px;
 }
 #content_area .store_content .item img {
 width: 140px;
-margin-right: 30px;
+margin-right: 20px;
 object-fit: cover;
 }
 @media screen and (max-width: 390px) {
