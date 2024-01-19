@@ -83,7 +83,9 @@ function addToCart(menuId) {
         </div>
       </div>
       
-      <Link href="/kitchens" class="go-back-button">キッチンに戻る</Link>
+      <div class="page_control_button">
+        <Link href="/kitchens" class="go-back-button">キッチンカーリストに戻る</Link>
+      </div>
 
       <div id="order_info">
         <Total :cartItems="localCartItems" />
@@ -149,6 +151,18 @@ color:#000;
 
 #footer_area {
 display: none;
+}
+
+.page_control_button {
+  text-align:center;
+}
+.page_control_button a {
+  display:block;
+  padding:14px 20px;
+  width:100%;
+  background-color:#29A8E1;
+  color:#fff;
+  border-radius:14px;
 }
 
 @media screen and (max-width: 780px) {
