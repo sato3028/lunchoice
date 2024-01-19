@@ -66,7 +66,7 @@ function addToCart(menuId) {
           <div class="item_name">{{ menu.name }}</div>
           <div class="item_control">
             <div class="item_order_control">
-              <p>{{ formatPrice(menu.price) }}円</p>
+              <p>¥{{ formatPrice(menu.price) }}</p>
               <select class="quantity" v-model="quantity[menu.id]">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -85,7 +85,7 @@ function addToCart(menuId) {
         </div>
       </div>
       
-      <div class="page_control_button">
+      <div class="page_control_button_buck">
         <Link href="/kitchens" class="go-back-button">キッチンカーリストに戻る</Link>
       </div>
 
@@ -163,6 +163,16 @@ display: none;
   padding:14px 20px;
   width:100%;
   background-color:#29A8E1;
+  color:#fff;
+  border-radius:14px;
+}
+
+.page_control_button_buck a {
+  text-align: center;
+  display:block;
+  padding:14px 20px;
+  width:100%;
+  background-color: #727171;
   color:#fff;
   border-radius:14px;
 }

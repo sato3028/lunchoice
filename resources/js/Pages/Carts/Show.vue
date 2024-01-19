@@ -28,7 +28,9 @@ const submitOrder = () => {
           <input type="text" id="cvc" disabled placeholder="123" />
         </div>
       </div>
-  
+      <div class="page_control_button_buck">
+        <Link href="/carts" class="go-back-button">カートに戻る</Link>
+      </div>
       <button @click="submitOrder">購入</button>
     </div>
   </template>
@@ -50,5 +52,15 @@ const submitOrder = () => {
     width: 100%;
     padding: 8px;
   }
+
+  .page_control_button_buck a {
+  text-align: center;
+  display:block;
+  padding:14px 20px;
+  width:100%;
+  background-color: #727171;
+  color:#fff;
+  border-radius:14px;
+}
   </style>
   
