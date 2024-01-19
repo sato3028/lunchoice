@@ -34,29 +34,28 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/kitchens', [KitchenController::class, 'index'])->name('kitchens');
-Route::get('/kitchens/{kitchen}/menus', [MenuController::class, 'index']);
-
-Route::post('/cart/add', [ReservationController::class, 'addToCart']);
-Route::get('/cart/items', [ReservationController::class, 'getCartItems']);
-
-Route::get('/carts', [CartController::class, 'index']);
-Route::get('/carts/show', [CartController::class, 'show']);
-Route::get('/carts/accept', [CartController::class, 'accept']);
-Route::get('/carts/complete', function () {
-    return Inertia::render('Carts/Complete');
-});
-Route::post('/update-cart', [CartController::class, 'updateCart']);
-    
-Route::post('/create-order', [CartController::class, 'createOrder']);
-Route::post('/accept-order', [CartController::class, 'acceptOrder']);
-
-Route::get('/reset-session', [ReservationController::class, 'resetSession'])->name('reset-session');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/kitchens', [KitchenController::class, 'index'])->name('kitchens');
+    Route::get('/kitchens/{kitchen}/menus', [MenuController::class, 'index']);
+
+    Route::post('/cart/add', [ReservationController::class, 'addToCart']);
+    Route::get('/cart/items', [ReservationController::class, 'getCartItems']);
+
+    Route::get('/carts', [CartController::class, 'index']);
+    Route::get('/carts/show', [CartController::class, 'show']);
+    Route::get('/carts/accept', [CartController::class, 'accept']);
+    Route::get('/carts/complete', function () {
+        return Inertia::render('Carts/Complete');
+    });
+    Route::post('/update-cart', [CartController::class, 'updateCart']);
+        
+    Route::post('/create-order', [CartController::class, 'createOrder']);
+    Route::post('/accept-order', [CartController::class, 'acceptOrder']);
+
+    Route::get('/reset-session', [ReservationController::class, 'resetSession'])->name('reset-session');
 });
 
 require __DIR__.'/auth.php';

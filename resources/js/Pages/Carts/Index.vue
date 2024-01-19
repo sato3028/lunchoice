@@ -57,6 +57,20 @@ onMounted(() => {
     });
   }
 });
+
+function formatPrice(price) {
+  const numericPrice = parseFloat(price);
+  if (!isNaN(numericPrice)) {
+    if (Number.isInteger(numericPrice)) {
+      return numericPrice.toString();
+    } else {
+      return numericPrice.toFixed(2);
+    }
+  } else {
+    console.error('価格データが無効です:', price);
+    return '0';
+  }
+}
 </script>
 
 <template>
@@ -64,10 +78,13 @@ onMounted(() => {
 
   <div id="content_area">
       <div id="step">
-          <h2>買い物かごを確認する</h2>
+          <h2>カートを確認する</h2>
       </div>
       <div v-if="cartItems.length === 0">
         カートには何も入っていません。
+        <div class="page_control_button">
+          <Link href="/kitchens" class="btn">キッチンカーリストに戻る</Link>
+        </div>
       </div>
       <div v-else class="store_content">
         <div v-for="(group, kitchenId) in groupedCartItems" :key="kitchenId">
@@ -77,22 +94,19 @@ onMounted(() => {
             <div class="item_info">
               <div class="item_name">{{ item.name }}</div>
               <div class="item_control">
-                <p class="price">¥{{ item.price }}</p>
+                <p class="price">¥{{ formatPrice(item.price) }}</p>
                 <p class="quantity">数量: {{ item.quantity }}</p>
                 <button @click="removeItem(item.id)">削除</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="page_control_button">
+        <div class="page_control_button_buck">
           <Link href="/kitchens" class="btn">キッチンカーリストに戻る</Link>
         </div>
         <div class="page_control_button buttons_margin">
           <Link href="/carts/show" class="btn">購入</Link>
         </div>
-      </div>
-      <div>
-        <Link href="/kitchens" class="btn">キッチンカー一覧に戻る</Link>
       </div>
   </div>
 </template>
@@ -162,6 +176,16 @@ header .logo img {
   padding:14px 20px;
   width:100%;
   background-color:#29A8E1;
+  color:#fff;
+  border-radius:14px;
+}
+
+.page_control_button_buck a {
+  text-align: center;
+  display:block;
+  padding:14px 20px;
+  width:100%;
+  background-color: #727171;
   color:#fff;
   border-radius:14px;
 }
