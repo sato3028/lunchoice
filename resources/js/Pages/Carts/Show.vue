@@ -14,7 +14,7 @@ const submitOrder = () => {
         <div class="w-full pt-1 pb-5">
         </div>
         <div class="mb-10">
-            <h1 class="text-center font-bold text-xl uppercase">支払い</h1>
+            <h1 class="text-center font-bold text-xl uppercase">お支払い</h1>
         </div>
         <div class="mb-3 flex -mx-2">
             <div class="px-2">

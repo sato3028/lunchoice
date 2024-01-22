@@ -96,7 +96,7 @@ function formatPrice(price) {
               <div class="item_control">
                 <p class="price">¥{{ formatPrice(item.price) }}</p>
                 <p class="quantity">数量: {{ item.quantity }}</p>
-                <button @click="removeItem(item.id)">削除</button>
+                <button class="delete_button" @click="removeItem(item.id)">削除</button>
               </div>
             </div>
           </div>
@@ -237,14 +237,17 @@ header .logo img {
   align-items: flex-end;
   width: 100%;
 }
+
 #content_area .store_content .item .item_control .price {
   margin-right: 20px;
   font-size: 20px;
   color: #707070;
 }
-#content_area .store_content .item .item_control .quantity {
-  height: 20px;
+
+#content_area .store_content .item .item_control .delete_button {
+  color:#9e1c1c;
 }
+
 #content_area .store_content .item img {
   width: 140px;
   margin-right: 30px;
