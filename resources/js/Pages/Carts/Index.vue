@@ -95,13 +95,13 @@ function formatPrice(price) {
               <div class="item_name">{{ item.name }}</div>
               <div class="item_control">
                 <p class="price">¥{{ formatPrice(item.price) }}</p>
-                <p class="quantity">数量: {{ item.quantity }}</p>
+                <p class="quantity only_display">数量: {{ item.quantity }}</p>
                 <button class="delete_button" @click="removeItem(item.id)">削除</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="page_control_button_buck">
+        <div class="page_control_button_back">
           <Link href="/kitchens" class="btn">キッチンカーリストに戻る</Link>
         </div>
         <div class="page_control_button buttons_margin">
@@ -180,7 +180,7 @@ header .logo img {
   border-radius:14px;
 }
 
-.page_control_button_buck a {
+.page_control_button_back a {
   text-align: center;
   display:block;
   padding:14px 20px;
@@ -217,7 +217,7 @@ header .logo img {
   display: flex;
   flex-wrap: wrap;
 }
-/*#content_area .store_content .item:not(:last-child) {*/
+
 #content_area .store_content .item {
   margin-bottom: 40px;
 }
@@ -242,6 +242,10 @@ header .logo img {
   margin-right: 20px;
   font-size: 20px;
   color: #707070;
+}
+
+#content_area .store_content .item .item_control .quantity.only_display {
+  height:auto;
 }
 
 #content_area .store_content .item .item_control .delete_button {
