@@ -1,6 +1,6 @@
 <script setup>
   import { onMounted, ref } from 'vue';
-  import { Link, router } from '@inertiajs/vue3'
+  import { Link, router, Head } from '@inertiajs/vue3'
   import Header_Component from '@/Layouts/Header.vue';
   import Total from '@/Components/Total.vue';
 
@@ -11,6 +11,7 @@
 </script>
 
 <template>
+  <Head title="キッチンカーを選ぶ" />
   <Header_Component />
 
   <div id="content_area">

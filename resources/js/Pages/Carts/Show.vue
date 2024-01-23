@@ -1,5 +1,5 @@
 <script setup>
-import { router, Link } from '@inertiajs/vue3';
+import { router, Link, Head } from '@inertiajs/vue3';
 import Header_Component from '@/Layouts/Header.vue';
 
 const submitOrder = () => {
@@ -8,6 +8,8 @@ const submitOrder = () => {
 </script>
 
 <template>
+  <Head title="お支払い" />
+
   <Header_Component />
     <div class="min-w-screen min-h-screen flex justify-center px-5">
     <div class="w-full mx-auto rounded-lg bg-white p-5 text-gray-700" style="max-width: 600px">
