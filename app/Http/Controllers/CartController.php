@@ -57,7 +57,7 @@ class CartController extends Controller
 
             Session::forget('cart');
 
-            return Inertia::render('Carts/Accept');
+            return Inertia::render('Carts/Accept', ['reservationId' => $reservation->id]);
         }
 
         return Inertia::render('Carts/Index', [

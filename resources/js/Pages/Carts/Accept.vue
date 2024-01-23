@@ -1,7 +1,11 @@
 <script setup>
 import { ref } from 'vue';
-import { Link, router } from '@inertiajs/vue3'
+import { Link, router, Head } from '@inertiajs/vue3'
 import Header_Component from '@/Layouts/Header.vue';
+
+const props = defineProps({
+  reservationId: Number
+});
 
 const confirmAcceptance = () => {
   if (confirm('注文を受け取りますか？')) {
@@ -11,14 +15,17 @@ const confirmAcceptance = () => {
 </script>
 
 <template>
+  <Head title="注文の受け取り" />
     <div>
       <Header_Component />
   
       <div id="content_area">
         <h1 id="step">注文の受け取り</h1>
         <p class="text_center">注文が正常に完了しました。</p>
-        <p class="display_order_id">654</p>
-        <button class="confirm_button" @click="confirmAcceptance">受け取る</button>
+        <p class="display_order_id">注文ID: {{ reservationId }}</p>
+        <div>
+            <button @click="confirmAcceptance" class="block w-full max-w-xs mx-auto text-white bg-blue-btn rounded-lg px-3 py-3 font-semibold"><i class="mdi mdi-lock-outline mr-1"></i> 受け取る</button>
+        </div>
       </div>
     </div>
 </template>

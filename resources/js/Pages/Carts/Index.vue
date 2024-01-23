@@ -1,6 +1,6 @@
 <script setup>
 import { ref,computed, onMounted } from 'vue';
-import { Link, router } from '@inertiajs/vue3';
+import { Link, router, Head } from '@inertiajs/vue3';
 import Header_Component from '@/Layouts/Header.vue';
 
 const props = defineProps({
@@ -74,6 +74,8 @@ function formatPrice(price) {
 </script>
 
 <template>
+  <Head title="カートを確認する" />
+
   <Header_Component />
 
   <div id="content_area">
@@ -90,7 +92,7 @@ function formatPrice(price) {
         <div v-for="(group, kitchenId) in groupedCartItems" :key="kitchenId">
           <h3 class="store_name">{{ kitchenName(kitchenId) }}</h3>
           <div v-for="(item, index) in group.items" :key="index" class="item">
-            <img src="https://placehold.jp/100x100.png" alt="">
+            <img :src="item.image || 'https://res.cloudinary.com/dqaxgeag8/image/upload/v1705973920/NO_IMAGE_vwtrfx.png'" alt="メニュー画像">
             <div class="item_info">
               <div class="item_name">{{ item.name }}</div>
               <div class="item_control">
@@ -101,11 +103,15 @@ function formatPrice(price) {
             </div>
           </div>
         </div>
-        <div class="page_control_button_back">
-          <Link href="/kitchens" class="btn">キッチンカーリストに戻る</Link>
+        <div>
+          <Link
+            href="/kitchens"
+            class="block w-full max-w-xs mx-auto bg-gray-500 hover:bg-gray-700 focus:bg-gray-700 text-white rounded-lg px-3 py-3 font-semibold text-center">キッチンカーリストに戻る</Link>
         </div>
-        <div class="page_control_button buttons_margin">
-          <Link href="/carts/show" class="btn">購入</Link>
+        <div class="mt-4">
+            <Link
+            href="/carts/show"
+            class="block w-full max-w-xs mx-auto bg-blue-btn text-white rounded-lg px-3 py-3 font-semibold text-center">購入</Link>
         </div>
       </div>
   </div>
@@ -193,6 +199,22 @@ header .logo img {
 .page_control_button.buttons_margin {
   margin-top:14px;
 }
+
+.bg-blue-btn{
+    background-color: #29A8E1;
+  }
+  
+  .bg-blue-btn:hover{
+    background-color: #2387C1;
+  }
+
+  .text-blue{
+    color: #29A8E1;
+  }
+
+  .text-blue:hover{
+    color: #2387C1;
+  }
 
 @media screen and (max-width: 780px) {
   #content_area {

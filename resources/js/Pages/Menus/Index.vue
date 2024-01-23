@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { router, Link } from '@inertiajs/vue3';
+import { router, Link, Head } from '@inertiajs/vue3';
 import Total from '@/Components/Total.vue';
 import Header_Component from '@/Layouts/Header.vue';
 
@@ -53,15 +53,16 @@ function addToCart(menuId) {
 </script>
 
 <template>
+  <Head title="メニュー一覧" />
   <Header_Component />
 
   <div id="content_area">
     <div id="step">
-      <h2>メニュー</h2>
+      <h2>メニュー一覧</h2>
     </div>
     <div class="store_content">
       <div v-for="menu in menus" :key="menu.id" class="item">
-        <img src="https://placehold.jp/100x100.png" alt="">
+        <img :src="menu.image || 'https://res.cloudinary.com/dqaxgeag8/image/upload/v1705973920/NO_IMAGE_vwtrfx.png'" alt="メニュー画像">
         <div class="item_info">
           <div class="item_name">{{ menu.name }}</div>
           <div class="item_control">
@@ -85,8 +86,10 @@ function addToCart(menuId) {
         </div>
       </div>
       
-      <div class="page_control_button_buck">
-        <Link href="/kitchens" class="go-back-button">キッチンカーリストに戻る</Link>
+      <div>
+        <Link
+          href="/kitchens"
+          class="block w-full max-w-xs mx-auto bg-gray-500 hover:bg-gray-700 focus:bg-gray-700 text-white rounded-lg px-3 py-3 font-semibold text-center">キッチンカーリストに戻る</Link>
       </div>
 
       <div id="order_info">

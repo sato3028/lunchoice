@@ -1,16 +1,22 @@
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import { Link, Head } from '@inertiajs/vue3'
 import Header_Component from '@/Layouts/Header.vue';
 </script>
 
 <template>
+  <Head title="受け取り完了" />
+  
     <div>
       <Header_Component />
   
       <div id="content_area">
-        <h1 id="step">注文が完了しました</h1>
-        <p class="thanks_message">ご購入ありがとうございました！</p>
-        <Link href="/kitchens" class="move_button">キッチンカーリストに戻る</Link>
+        <h1 id="step">受け取り完了</h1>
+        <p class="thanks_message">ご利用ありがとうございました！</p>
+        <div class="mt-4">
+            <Link
+            href="/kitchens"
+            class="block w-full max-w-xs mx-auto bg-gray-500 hover:bg-gray-700 focus:bg-gray-700 text-white rounded-lg px-3 py-3 font-semibold text-center">キッチンカーリストに戻る</Link>
+        </div>
       </div>
     </div>
 </template>
