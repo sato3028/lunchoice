@@ -24,13 +24,13 @@ defineProps({
     <Head title="Welcome" />
     <Header_Component />
 
-    <div class="flex flex-col justify-start items-center h-screen bg-white mt-60">
-        <div class="text-center mb-4">
-            <h1 class="text-lg font-semibold text-gray-800">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro, qui voluptatibus itaque quisquam possimus</h1>
-            <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit ex mollitia, numquam culpa dicta nesciunt, adipisci doloremque modi, possimus incidunt asperiores? Possimus natus ducimus libero delectus amet maxime voluptate fuga.</p>
+    <div class="flex flex-col justify-start items-center h-screen bg-white mt-52 px-4">
+        <div class="text-left mb-4">
+            <h2 class="text-2xl font-black text-gray-900">予約制ピックアップサービスで、もっと快適なランチタイムを</h2>
+            <p class="text-base text-gray-600 leading-relaxed pt-4">時間が限られたお昼の休憩時間、ランチョイスの予約制ピックアップサービスでキッチンカーの料理を並ばずに購入しませんか？日替わりで選べる4つの店舗から、あなたの好みに合ったメニューを選んで予約するだけ！お昼時間を有効活用し、快適なランチタイムをお楽しみください♪</p>
         </div>
 
-        <div v-if="canLogin" class="w-full px-4">
+        <div v-if="canLogin" class="w-full mt-5">
             <Link
                 v-if="$page.props.auth.user"
                 href="/kitchens"
@@ -51,6 +51,7 @@ defineProps({
         </div>
     </div>
 </template>
+
 
 <style>
 .bg-blue-btn{
