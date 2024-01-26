@@ -24,7 +24,11 @@ defineProps({
     <Head title="Welcome" />
     <Header_Component />
 
-    <div class="flex flex-col justify-start items-center h-screen bg-white mt-52 px-4">
+    <div>
+        <img src="https://res.cloudinary.com/dqaxgeag8/image/upload/v1706241462/key-visual_s7pl8n.png" alt="キービジュアル">
+    </div>
+
+    <div class="flex flex-col justify-start items-center h-screen bg-white mt-12 px-4">
         <div class="text-left mb-4">
             <h2 class="text-2xl font-black text-gray-900">予約制ピックアップサービスで、もっと快適なランチタイムを</h2>
             <p class="text-base text-gray-600 leading-relaxed pt-4">時間が限られたお昼の休憩時間、ランチョイスの予約制ピックアップサービスでキッチンカーの料理を並ばずに購入しませんか？日替わりで選べる4つの店舗から、あなたの好みに合ったメニューを選んで予約するだけ！お昼時間を有効活用し、快適なランチタイムをお楽しみください♪</p>
