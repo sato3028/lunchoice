@@ -41,6 +41,7 @@ margin: 30px 0;
 
 #content_area .thanks_message {
   text-align:center;
+  margin-bottom:20px;
 }
 
 #content_area .move_button {
