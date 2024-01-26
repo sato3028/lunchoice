@@ -40,6 +40,7 @@ body {
 #content_area {
   margin: 0 auto;
   max-width: 780px;
+  padding:0;
   /*border:1px solid #000;*/
 }
 #content_area #step {
