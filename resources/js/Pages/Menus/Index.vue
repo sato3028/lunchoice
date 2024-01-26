@@ -20,9 +20,6 @@ function formatPrice(price) {
     } else {
       return numericPrice.toFixed(2);
     }
-  } else {
-    console.error('価格データが無効です:', price);
-    return '0';
   }
 }
 
@@ -43,11 +40,7 @@ function addToCart(menuId) {
       price: menu.price
     });
 
-    console.log('送信するカートアイテム:', localCartItems.value);
-
     router.post('/cart/add', { cartItems: localCartItems.value });
-  } else {
-    console.error('メニュー項目が見つかりません: ', menuId);
   }
 }
 </script>

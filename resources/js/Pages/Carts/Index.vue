@@ -42,22 +42,6 @@ function removeItem(itemId) {
   router.post('/update-cart', { cartItems: updatedCartItems });
 }
 
-onMounted(() => {
-  console.log('カートアイテム:', props.cartItems);
-  if (props.cartItems.length > 0) {
-    console.log('カートアイテムの型:');
-    props.cartItems.forEach((item, index) => {
-      console.log(`アイテム ${index}:`, {
-        kitchenId: typeof item.kitchenId,
-        menuId: typeof item.menuId,
-        name: typeof item.name,
-        price: typeof item.price,
-        quantity: typeof item.quantity
-      });
-    });
-  }
-});
-
 function formatPrice(price) {
   const numericPrice = parseFloat(price);
   if (!isNaN(numericPrice)) {
@@ -67,7 +51,6 @@ function formatPrice(price) {
       return numericPrice.toFixed(2);
     }
   } else {
-    console.error('価格データが無効です:', price);
     return '0';
   }
 }
